@@ -5,7 +5,7 @@ function preventCreateFormFromSending(form){
     })
 }
 
-function preventCreateUserFromSending(form){
+function preventCreateStudentFromSending(form){
     form.submit(function (event){
         event.preventDefault(); //forhindre at formen bliver sendt
         createStudent($("#studentName").val()) // hent value fra <input>
@@ -14,6 +14,7 @@ function preventCreateUserFromSending(form){
 
 function getStudent(){
     console.log("getStudent er kaldt");
+    var $student = $('#student');
     $.ajax({
         url:"/api/studentservice",
         type:"POST",
@@ -47,9 +48,8 @@ function createStudent(student){
         contentType:"application/JSON",
         data: JSON.stringify(createStudentObject),
         success:function (data){
-            $("#student").prepend("<div>" + data.student.pop().studentName +
-                "</div>")
-            $("#email").prepend("<div>" + data.email.pop().email + "</div>")
+            $("#student").prepend("<div>" + data.student.pop().studentName + "</div>"),
+            $("#email").prepend("<div>" + data.email.pop().email + "</div>"),
             $("#status").html("Server: Student OK");
         },
         error:function (data){

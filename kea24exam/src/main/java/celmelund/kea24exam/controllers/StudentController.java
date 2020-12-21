@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class StudentController {
 
-    private final StudentService studentService;
+    private StudentService studentService;
     private SupervisorService supervisorService;
 
     public StudentController(StudentService studentService) {

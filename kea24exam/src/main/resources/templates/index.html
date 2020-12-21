@@ -19,11 +19,23 @@
 
 <div>
 <form id="createform">
-    <p>Name: <input type="text" id="studentName"></p>
-    <p>Email: <input type="text" id="email"></p>
-  <input type="submit" value="Create">
+    <label>Name: <input type="text" id="studentName"></label>
+    <br>
+    <label>Email: <input type="text" id="email"></label>
+    <input type="submit" value="Create">
 </form>
 </div>
+
+
+
+<h2>New Table: </h2>
+<div id="status"></div>
+<div id="student"></div>
+
+
+
+
+
 
 <h2>Table List:</h2>
 
@@ -66,7 +78,7 @@
 <script type="text/javascript">
     checkQuery();
     getStudent();
-    preventCreateUserFromSending($("#createform"));
+    preventCreateStudentFromSending($("#createform"));
 </script>
 </body>
 </html>
