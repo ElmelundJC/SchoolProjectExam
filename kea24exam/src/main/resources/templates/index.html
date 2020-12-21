@@ -3,21 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <title>School List</title>
+    <link rel="stylesheet" href="/../stylesheets/style.css" type="text/css">
+
 
     <script type="text/javascript" th:src="@{/functions.js}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 </head>
 <body>
+<a href="/"><h5>Refresh Page</h5></a>
 
 <h1>School System</h1>
 
-
 <h2>Add Student</h2>
 
+<div>
+<form id="createform">
+    <p>Name: <input type="text" id="studentName"></p>
+    <p>Email: <input type="text" id="email"></p>
+  <input type="submit" value="Create">
+</form>
+</div>
 
 <h2>Table List:</h2>
 
+  <form action="/api/studentservice" method="post" th:each="student:${students}">
+      <div>
+          <div class="school-table"  align="center" cellspacing="5">
+    <thead>
+    <tr>
+      <th>Students</th>
+      <th>Email</th>
+      <th>Supervisor</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Name: <input type="text" th:text="${student.getStudentName}"></td>
+      <td>Email:
+          <input type="text"  th:text="${student.getEmail}">
+          <input type="hidden" th:value="${student.id}" name="id">
+      </td>
+      <td>Supervisor: <input type="text" th:text="${student.getSupervisor}"></td>
+      <td><input type="submit" name="Update" value="Update"></td>
+      <td><input type="submit" name="Delete" value="Delete"></td>
+    </tr>
+    <tr>
+      <td>2010-2013</td>
+      <td>Lead Developer at Tempo App</td>
+    </tr>
+    <tr>
+      <td>2013-2015</td>
+      <td>Clinical Doctor at the National Health Service</td>
+    </tr>
+  </tbody>
+    </form>
+</div>
+</div>
 
-
+<script type="text/javascript">
+    checkQuery();
+    getStudent();
+    preventCreateUserFromSending($("#createform"));
+</script>
 </body>
 </html>

@@ -11,7 +11,10 @@ public class Student {
     private Long id;
 
     @Column
-    private String name;
+    private String studentName;
+
+    @Column
+    private String email;
 
     @ManyToOne
     @JoinColumn(name = "supervisor_id")
@@ -26,12 +29,20 @@ public class Student {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getStudentName() {
+        return studentName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setStudentName(String name) {
+        this.studentName = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public Supervisor getSupervisor() {

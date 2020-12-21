@@ -1,4 +1,0 @@
-DROP DATABASE IF EXISTS `KEA24Construction` ;
-CREATE DATABASE `KEA24Construction` DEFAULT CHARACTER SET utf8 ;
-USE `KEA24Construction` ;
-
