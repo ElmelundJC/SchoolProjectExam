@@ -19,7 +19,7 @@ public class HomeController {
 
     }
 
-    @GetMapping("/home")
+    @GetMapping("/")
     public String index(Model model) {
         model.addAttribute("students", studentService.findAll());
         model.addAttribute("supervisors", supervisorService.findAll());

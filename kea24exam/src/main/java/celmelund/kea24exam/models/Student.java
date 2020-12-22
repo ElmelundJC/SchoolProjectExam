@@ -1,5 +1,7 @@
 package celmelund.kea24exam.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,14 +14,15 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name")
+    @Column
     private String name;
 
-    @Column(name = "email")
+    @Column
     private String email;
 
     @ManyToOne
     @JoinColumn(name = "supervisor_id")
+    @JsonManagedReference
     private Supervisor supervisor;
 
     public Student(String name) {

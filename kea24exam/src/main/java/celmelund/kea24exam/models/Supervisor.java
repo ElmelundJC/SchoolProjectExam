@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import java.util.Set;
 
-
 @Entity
 @Table(name = "supervisors")
 public class Supervisor {
@@ -14,7 +13,7 @@ public class Supervisor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long supervisor_id;
 
-    @Column(name = "supervisorName")
+    @Column
     private String supervisorName;
 
     @JsonIgnore
