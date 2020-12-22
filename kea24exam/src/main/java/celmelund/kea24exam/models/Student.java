@@ -22,7 +22,6 @@ public class Student {
 
     @ManyToOne
     @JoinColumn(name = "supervisor_id")
-    @JsonManagedReference
     private Supervisor supervisor;
 
     public Student(String name) {
@@ -63,10 +62,5 @@ public class Student {
 
     public void setSupervisor(Supervisor supervisor) {
         this.supervisor = supervisor;
-    }
-
-    public void addStudent(String name) {
-        List<Student> students = new ArrayList<>();
-        students.add(new Student(name));
     }
 }

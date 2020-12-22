@@ -34,7 +34,7 @@ function getStudent(){
                     "</div>");
 
             })
-            $("#status").html("Server: Student OK");
+            //$("#status").html("Server: Student OK");
         },
         error:function (data){
             console.log("ERROR i svar fra server");
@@ -54,15 +54,18 @@ function createStudent(name, email, supervisor_id){
     object1["email"] = email;
     object1["supervisor"] = object2;
     $.ajax({
-        url:"api/createstudent",
+        url:"/api/createstudent",
         type:"POST",
         contentType:"application/JSON",
         data: JSON.stringify(object1),
         success:function (data){
-            /*$("#student").prepend("<div>" + data.student.pop().name +
+            location.reload();
+            /*$("#student").prepend("<div>" + data.name.pop().name +
                 "</div>")
             $("#email").prepend("<div>" + data.email.pop().email + "</div>")
+            $("#supervisor_id").prepend("<div>" + data.supervisor_id.pop().supervisor + "</div>")
             $("#status").html("Server: Student OK");*/
+            //refreshDiv();
         },
         error:function (data){
             console.log("ERROR i svar fra server");
@@ -79,3 +82,11 @@ function checkQuery(){
         console.log("jQuery er IKKE loaded")
     }
 }
+
+
+/*function refreshDiv(){
+    var container = document.getElementById("refresh-page");
+    var content = container.innerHTML;
+    container.innerHTML= content;
+}
+*/

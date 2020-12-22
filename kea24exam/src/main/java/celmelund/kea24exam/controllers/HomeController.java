@@ -16,13 +16,12 @@ public class HomeController {
     public HomeController(StudentService studentService, SupervisorService supervisorService) {
         this.studentService = studentService;
         this.supervisorService = supervisorService;
-
     }
 
-    @GetMapping("/")
+    @GetMapping("/home")
     public String index(Model model) {
-        model.addAttribute("students", studentService.findAll());
-        model.addAttribute("supervisors", supervisorService.findAll());
+      //model.addAttribute("students", studentService.findAll());
+      model.addAttribute("supervisors", supervisorService.findAll());
         return "index";
     }
 

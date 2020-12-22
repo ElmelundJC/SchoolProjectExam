@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class StudentController {
 
+
     private StudentJPA studentJPA;
     private SupervisorJPA supervisorJPA;
+
 
     public StudentController(StudentJPA studentJPA, SupervisorJPA supervisorJPA) {
         this.studentJPA = studentJPA;
@@ -28,10 +30,24 @@ public class StudentController {
         return ResponseEntity.ok(studentJPA);
     }
 
-    @PostMapping("api/createstudent")
-    public ResponseEntity<StudentJPA> createStudent(@RequestBody Student student){
+    @PostMapping("/api/createstudent")
+    public ResponseEntity<StudentService> createStudent(@RequestBody Student student){
         System.out.println("api/createstudent kaldt med ");
         studentJPA.save(student);
         return ResponseEntity.ok(studentJPA);
     }
+
+    /*
+    @PostMapping("/api/updatestudent")
+    public ResponseEntity<Student> updateStudent(@RequestBody Student student){
+        studentJPA.findById(studen;);
+    }
+     */
+
+
+    @PostMapping("/api/deleteStudent")
+    public void deleteStudentById(@RequestBody Student student){
+        studentJPA.deleteById(student.getId());
+    }
+
 }
