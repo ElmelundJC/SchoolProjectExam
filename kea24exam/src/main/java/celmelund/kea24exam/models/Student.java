@@ -1,6 +1,8 @@
 package celmelund.kea24exam.models;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "students")
@@ -10,15 +12,22 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
-    private String studentName;
+    @Column(name = "name")
+    private String name;
 
-    @Column
+    @Column(name = "email")
     private String email;
 
     @ManyToOne
     @JoinColumn(name = "supervisor_id")
     private Supervisor supervisor;
+
+    public Student(String name) {
+        this.name = name;
+    }
+
+    public Student() {
+    }
 
 
     public Long getId() {
@@ -29,12 +38,12 @@ public class Student {
         this.id = id;
     }
 
-    public String getStudentName() {
-        return studentName;
+    public String getName() {
+        return name;
     }
 
-    public void setStudentName(String name) {
-        this.studentName = name;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getEmail() {
@@ -51,5 +60,10 @@ public class Student {
 
     public void setSupervisor(Supervisor supervisor) {
         this.supervisor = supervisor;
+    }
+
+    public void addStudent(String name) {
+        List<Student> students = new ArrayList<>();
+        students.add(new Student(name));
     }
 }

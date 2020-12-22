@@ -3,6 +3,9 @@ package celmelund.kea24exam.controllers;
 import celmelund.kea24exam.models.Student;
 import celmelund.kea24exam.service.StudentService;
 import celmelund.kea24exam.service.SupervisorService;
+import celmelund.kea24exam.service.springDataJPA.StudentJPA;
+import celmelund.kea24exam.service.springDataJPA.SupervisorJPA;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,23 +13,25 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class StudentController {
 
-    private StudentService studentService;
-    private SupervisorService supervisorService;
+    private StudentJPA studentJPA;
+    private SupervisorJPA supervisorJPA;
 
-    public StudentController(StudentService studentService) {
-        this.studentService = studentService;
+    public StudentController(StudentJPA studentJPA, SupervisorJPA supervisorJPA) {
+        this.studentJPA = studentJPA;
+        this.supervisorJPA = supervisorJPA;
     }
 
     @PostMapping("api/studentservice")
     public ResponseEntity<StudentService> getSearchResults(){
+        studentJPA.studentList = studentJPA.findAll();
         System.out.println("api/studentservice kaldt med: ");
-        return ResponseEntity.ok(studentService);
+        return ResponseEntity.ok(studentJPA);
     }
 
     @PostMapping("api/createstudent")
-    public ResponseEntity<StudentService> createStudent(@RequestBody Student student){
+    public ResponseEntity<StudentJPA> createStudent(@RequestBody Student student){
         System.out.println("api/createstudent kaldt med ");
-        studentService.save(student);
-        return ResponseEntity.ok(studentService);
+        studentJPA.save(student);
+        return ResponseEntity.ok(studentJPA);
     }
 }

@@ -5,9 +5,7 @@ import celmelund.kea24exam.repositories.SupervisorRepository;
 import celmelund.kea24exam.service.SupervisorService;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class SupervisorJPA implements SupervisorService {
@@ -20,9 +18,9 @@ public class SupervisorJPA implements SupervisorService {
 
     @Override
     public Set<Supervisor> findAll() {
-        Set<Supervisor> set = new HashSet<>();
-        supervisorRepository.findAll().forEach(set::add);
-        return set;
+        Set<Supervisor> supervisors = new HashSet<>();
+        supervisorRepository.findAll().forEach(supervisors::add);
+        return supervisors;
     }
 
     @Override
@@ -43,5 +41,12 @@ public class SupervisorJPA implements SupervisorService {
     @Override
     public Optional<Supervisor> findById(Long aLong) {
         return supervisorRepository.findById(aLong);
+    }
+
+    @Override
+    public List<Supervisor> getSupervisors() {
+        List<Supervisor> list = new ArrayList<>();
+        supervisorRepository.findAll();
+        return list;
     }
 }

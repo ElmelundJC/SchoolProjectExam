@@ -10,15 +10,17 @@ import java.util.*;
 @Service
 public class StudentJPA implements StudentService {
 
+    public Set<Student> studentList;
     private final StudentRepository studentRepository;
 
     public StudentJPA(StudentRepository studentRepository) {
         this.studentRepository = studentRepository;
     }
 
+
     @Override
     public Set<Student> findAll() {
-        Set<Student> students = new HashSet<>();
+        Set<Student> students =new HashSet<>();
         studentRepository.findAll().forEach(students::add);
         return students;
     }
@@ -43,6 +45,7 @@ public class StudentJPA implements StudentService {
         return studentRepository.findById(aLong);
     }
 
+    /*
     @Override
     public List<Student> studentsWithNoTeacher() {
         List<Student> list = new ArrayList<>();
@@ -53,5 +56,6 @@ public class StudentJPA implements StudentService {
         });
         return list;
     }
+    */
 
 }

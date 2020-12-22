@@ -1,5 +1,7 @@
 package celmelund.kea24exam.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -10,28 +12,29 @@ public class Supervisor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long supervisor_id;
 
-    @Column
-    private String supervisor;
+    @Column(name = "supervisorName")
+    private String supervisorName;
 
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "supervisor")
     private Set<Student> students;
 
-    public Long getId() {
-        return id;
+    public Long getSupervisor_id() {
+        return supervisor_id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setSupervisor_id(Long id) {
+        this.supervisor_id = id;
     }
 
-    public String getSupervisor() {
-        return supervisor;
+    public String getSupervisorName() {
+        return supervisorName;
     }
 
-    public void setSupervisor(String supervisor) {
-        this.supervisor = supervisor;
+    public void setSupervisorName(String supervisor) {
+        this.supervisorName = supervisor;
     }
 
     public Set<Student> getStudents() {
@@ -40,5 +43,9 @@ public class Supervisor {
 
     public void setStudents(Set<Student> students) {
         this.students = students;
+    }
+
+    public String toString(){
+        return supervisorName;
     }
 }

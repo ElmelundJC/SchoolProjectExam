@@ -1,11 +1,12 @@
-function preventCreateFormFromSending(form){
+function preventStudent(form){
     form.submit(function (event){
         event.preventDefault(); // forhindrer at formen bliver sendt
+        createStudent($("#name").val(), $("#email").val(), $("#supervisor_id").val());
         getStudent();
     })
 }
 
-function preventCreateStudentFromSending(form){
+function preventCreateUserFromSending(form){
     form.submit(function (event){
         event.preventDefault(); //forhindre at formen bliver sendt
         createStudent($("#studentName").val()) // hent value fra <input>
@@ -14,16 +15,24 @@ function preventCreateStudentFromSending(form){
 
 function getStudent(){
     console.log("getStudent er kaldt");
-    var $student = $('#student');
+    $("#tablename").empty();
+    $("#tableemail").empty();
+    $("#tablesupervisor").empty();
+
     $.ajax({
         url:"/api/studentservice",
         type:"POST",
         contentType:"application/JSON",
         success: function (data){
-            $.each(data.student, function (index,value){
-                $("#studentName").append("<div>" + value.studentName +
-                "</div>")
-                $("#email").append("<div>" + value.email + "</div>")
+            $.each(data.studentList, function (index,value){
+                $("#tablename").append("<div>" + value.name +
+                    "</div>");
+                $("#tableemail").append("<div>" + value.email +
+                    "</div>");
+                var name = value.supervisor.supervisorName
+                $("#tablesupervisor").append("<div>" + name +
+                    "</div>");
+
             })
             $("#status").html("Server: Student OK");
         },
@@ -35,22 +44,25 @@ function getStudent(){
 }
 
 
-function createStudent(student){
+function createStudent(name, email, supervisor_id){
     console.log("createStudent er kaldt");
-    //AJAX request
-    var createStudentObject = {};
-    createStudentObject["studentName","email"] = student;
-    var count = $("#student > div").length
-    createStudentObject["count"] = count
+//AJAX request
+    var object2 = {};
+    object2["supervisor_id"] = supervisor_id;
+    var object1 = {};
+    object1["name"] = name;
+    object1["email"] = email;
+    object1["supervisor"] = object2;
     $.ajax({
         url:"api/createstudent",
         type:"POST",
         contentType:"application/JSON",
-        data: JSON.stringify(createStudentObject),
+        data: JSON.stringify(object1),
         success:function (data){
-            $("#student").prepend("<div>" + data.student.pop().studentName + "</div>"),
-            $("#email").prepend("<div>" + data.email.pop().email + "</div>"),
-            $("#status").html("Server: Student OK");
+            /*$("#student").prepend("<div>" + data.student.pop().name +
+                "</div>")
+            $("#email").prepend("<div>" + data.email.pop().email + "</div>")
+            $("#status").html("Server: Student OK");*/
         },
         error:function (data){
             console.log("ERROR i svar fra server");
@@ -61,7 +73,7 @@ function createStudent(student){
 
 
 function checkQuery(){
-    if(typeof jQuery != undefined){
+    if(typeof jQuery !== undefined){
         console.log("jQuery er loaded")
     } else {
         console.log("jQuery er IKKE loaded")
