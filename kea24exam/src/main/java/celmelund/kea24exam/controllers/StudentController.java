@@ -31,10 +31,9 @@ public class StudentController {
     }
 
     @PostMapping("/api/createstudent")
-    public ResponseEntity<StudentService> createStudent(@RequestBody Student student){
+    public ResponseEntity<Student> createStudent(@RequestBody Student student){
         System.out.println("api/createstudent kaldt med ");
-        studentJPA.save(student);
-        return ResponseEntity.ok(studentJPA);
+        return ResponseEntity.ok(studentJPA.save(student));
     }
 
     /*
